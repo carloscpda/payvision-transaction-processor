@@ -28,7 +28,7 @@ describe("TransactionProcessor.filterInvalidTransactions method", () => {
   });
 
   test("filterInvalidTransactions with valid array", () => {
-    expect(processor.filterInvalidTransactions().transactions).toHaveLength(1);
+    expect(processor.filterInvalidTransactions().transactions).toHaveLength(3);
   });
 });
 
@@ -70,7 +70,9 @@ describe("TransactionProcessor.getTransactionsByBrand method", () => {
   });
 
   test("getTransactionsByBrand with valid brand", () => {
-    expect(processor.getTransactionsByBrand("visa")).toHaveLength(1);
+    expect(processor.getTransactionsByBrand("visa").transactions).toHaveLength(
+      1
+    );
   });
 
   test("getTransactionsByBrand with false brand", () => {
@@ -91,9 +93,9 @@ describe("TransactionProcessor.filterTransaction method", () => {
   });
 
   test("filterTransaction with predicates", () => {
-    const lowAmountFilter = tx => tx.amount < 10;
-    const visaFilter = tx => tx.brand === "visa";
-    const euroFilter = tx => tx.currency === "EUR";
+    const lowAmountFilter = (tx) => tx.amount < 10;
+    const visaFilter = (tx) => tx.brand === "visa";
+    const euroFilter = (tx) => tx.currency === "EUR";
 
     expect(
       processor.filterTransaction([lowAmountFilter, visaFilter, euroFilter])
@@ -102,7 +104,7 @@ describe("TransactionProcessor.filterTransaction method", () => {
   });
 
   test("filterTransaction with no result predicates", () => {
-    const yenFilter = tx => tx.currency === "JPY";
+    const yenFilter = (tx) => tx.currency === "JPY";
 
     expect(processor.filterTransaction([yenFilter]).transactions).toHaveLength(
       0
