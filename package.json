@@ -8,11 +8,20 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "node app.js"
+    "test:watch": "jest --watchAll",
+    "start": "node app.js",
+    "commit": "git-cz",
+    "release": "standard-version -a"
   },
-  "author": "Payvision",
+  "author": "Carlos Cepeda",
   "license": "ISC",
   "devDependencies": {
+    "cz-conventional-changelog": "^3.2.0",
     "jest": "^24.9.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
